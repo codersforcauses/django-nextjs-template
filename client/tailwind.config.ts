@@ -8,10 +8,46 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        // put color branding in globals.css
+        primary: {
+          DEFAULT: "var(--color-primary)",
+          content: "var(--color-primary-content)",
+        },
+        secondary: {
+          DEFAULT: "var(--color-secondary)",
+          content: "var(--color-secondary-content)",
+        },
+        accent: {
+          DEFAULT: "var(--color-accent)",
+          content: "var(--color-accent-content)",
+        },
+        neutral: {
+          DEFAULT: "var(--color-neutral)",
+          content: "var(--color-neutral-content)",
+        },
+        base: {
+          100: "var(--color-base-100)",
+          200: "var(--color-base-200)",
+          300: "var(--color-base-300)",
+          content: "var(--color-base-content)",
+        },
+        success: {
+          DEAFULT: "var(--color-success)",
+          content: "var(--color-success-content)",
+        },
+        warning: {
+          DEFAULT: "var(--color-warning)",
+          content: "var(--color-warning-content)",
+        },
+        error: {
+          DEFAULT: "var(--color-error)",
+          content: "var(--color-error-content)",
+        },
+        info: {
+          DEFAULT: "var(--color-info)",
+          content: "var(--color-info-content)",
+        },
       },
     },
   },
