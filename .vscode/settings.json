@@ -1,3 +1,4 @@
 {
-  "python.analysis.extraPaths": ["./server"]
+  "python.analysis.extraPaths": ["./server"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }

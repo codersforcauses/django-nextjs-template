@@ -2,33 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-  /* you can use hex codes instead */
-  --color-primary: oklch(49.12% 0.3096 275.75);
-  --color-primary-content: oklch(89.824% 0.06192 275.75);
-  --color-secondary: oklch(69.71% 0.329 342.55);
-  --color-secondary-content: oklch(98.71% 0.0106 342.55);
-  --color-accent: oklch(76.76% 0.184 183.61);
-  --color-accent-content: oklch(15.352% 0.0368 183.61);
-  --color-neutral: oklch(32.1785% 0.02476 255.701624);
-  --color-neutral-content: oklch(89.4994% 0.011585 252.096176);
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(96.1151% 0 0);
-  --color-base-300: oklch(92.4169% 0.00108 197.137559);
-  --color-base-content: oklch(27.8078% 0.029596 256.847952);
-  --color-success: oklch(64.8% 0.15 160);
-  --color-success-content: oklch(0% 0 0);
-  --color-warning: oklch(84.71% 0.199 83.87);
-  --color-warning-content: oklch(0% 0 0);
-  --color-error: oklch(71.76% 0.221 22.18);
-  --color-error-content: oklch(0% 0 0);
-  --color-info: oklch(72.06% 0.191 231.6);
-  --color-info-content: oklch(0% 0 0);
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }

@@ -1,13 +1,22 @@
-import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+import { Inter as FontSans } from "next/font/google";
+import { Button } from "../components/ui/button";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={cn(
+        "flex min-h-screen flex-col items-center gap-4 p-24 font-sans",
+        fontSans.variable,
+      )}
     >
-      <h1 className="text-primary">test</h1>
+      <h1 className="text-3xl text-primary">Test title</h1>
+      <Button>Click me to do nothing</Button>
     </main>
   );
 }
