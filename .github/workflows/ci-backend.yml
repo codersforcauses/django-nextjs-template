@@ -7,7 +7,7 @@ on:
 
 jobs:
   lint:
-    name: Flake8 Lint
+    name: Run Flake8
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,6 +29,7 @@ jobs:
           linters: flake8
           run: flake8 --max-line-length 150 server/
   build:
+    name: Build and test
     runs-on: ubuntu-latest
 
     defaults:
