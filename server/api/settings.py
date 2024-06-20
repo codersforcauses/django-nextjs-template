@@ -10,22 +10,33 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+FRONTEND_URL = os.environ.get("FRONTEND_URL")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-j5l#%&jn(e_cj80uzl#ah*6i80a+smu=1%ds0knqb_#b@t++0!"
+SECRET_KEY = os.environ.get("API_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("APP_ENV") == "DEVELOPMENT"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = (
+    os.environ.get("API_ALLOWED_HOSTS").split()
+    if os.environ.get("API_ALLOWED_HOSTS")
+    else []
+)
 
 
 # Application definition
@@ -37,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "api",
+    "api.healthcheck",
     "corsheaders",
     "rest_framework",
 ]
@@ -84,8 +95,12 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("POSTGRES_NAME") or "postgres",
+        "USER": os.environ.get("POSTGRES_USER") or "postgres",
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD") or "password",
+        "HOST": os.environ.get("POSTGRES_HOST") or "host.docker.internal",
+        "PORT": os.environ.get("POSTGRES_PORT") or 5432,
     }
 }
 
@@ -122,9 +137,19 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+PROJECT_ROOT = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))  # <- '/' directory
+
+STATIC_URL = "/static/"
+
+# STATIC_ROOT is where the static files get copied to when "collectstatic" is run.
+STATIC_ROOT = os.path.join(PROJECT_ROOT, "static_files")
+
+# This is where to _find_ static files when 'collectstatic' is run.
+# These files are then copied to the STATIC_ROOT location.
+STATICFILES_DIRS = (os.path.join(PROJECT_ROOT, "static"),)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
