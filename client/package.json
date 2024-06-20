@@ -7,6 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint src --fix && npm run format",
+    "lint:strict": "eslint src",
+    "format": "prettier -w src",
+    "format:check": "prettier -c src",
+    "typecheck": "tsc --noEmit",
     "prepare": "cd .. && husky client/.husky"
   },
   "dependencies": {
