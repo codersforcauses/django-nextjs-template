@@ -1,5 +1,6 @@
 services:
   db:
+    container_name: db
     image: postgres
     restart: unless-stopped
     volumes:
@@ -11,10 +12,10 @@ services:
       retries: 5
 
   server:
+    container_name: server
     build:
       context: .
       dockerfile: ./docker/server/Dockerfile
-    container_name: server
     restart: unless-stopped
     env_file: ./server/.env
     ports:
@@ -23,10 +24,10 @@ services:
       - ./server:/app
 
   client:
+    container_name: client
     build:
       context: .
       dockerfile: ./docker/client/Dockerfile
-    container_name: client
     restart: unless-stopped
     env_file: ./client/.env
     ports:

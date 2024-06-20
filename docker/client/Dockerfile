@@ -5,7 +5,6 @@ WORKDIR /app
 
 # Copy runtime script & make it executable
 COPY /docker/client/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
 COPY ./client/package.json ./client/package-lock.json ./
 
@@ -20,6 +19,7 @@ COPY ./client /app
 # ========================================
 
 # CMD commands get executed at container runtime!
+RUN chmod +x /entrypoint.sh
 CMD ["/entrypoint.sh"]
 
 # TODO: Production 

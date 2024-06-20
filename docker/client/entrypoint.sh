@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "${APP_NAME^^} - Vue CONTAINER STARTING..."
+echo "${APP_NAME^^} - NextJS CONTAINER STARTING..."
 echo $APP_NAME
 
 # Display Docker Image / CI / Release details
