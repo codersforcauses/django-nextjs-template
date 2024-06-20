@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "cd .. && husky client/.husky"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",

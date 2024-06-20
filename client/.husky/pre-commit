@@ -1,5 +1,5 @@
-#!/usr/bin/env sh
-# shellcheck disable=SC1091
-. "$(dirname "$0")/_/husky.sh"
+#!/bin/sh
 
-npx lint-staged
+. "$(dirname -- "$0")/_/husky.sh"
+
+cd ./client && npx lint-staged
