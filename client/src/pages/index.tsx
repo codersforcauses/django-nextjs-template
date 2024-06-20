@@ -13,7 +13,7 @@ const fontSans = FontSans({
 
 export default function Home() {
   const [clicked, setClicked] = useState(false);
-  const { data } = usePings({
+  const { data, isLoading } = usePings({
     enabled: clicked,
   });
 
@@ -25,7 +25,9 @@ export default function Home() {
       )}
     >
       <h1 className="text-3xl text-primary">Test title</h1>
-      <Button onClick={() => setClicked(true)}>Ping</Button>
+      <Button onClick={() => setClicked(true)}>
+        {isLoading ? "Loading" : "Ping"}
+      </Button>
       <p>
         Response from server: <span>{data as string}</span>
       </p>
