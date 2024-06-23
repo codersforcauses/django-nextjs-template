@@ -17,6 +17,14 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 If the models are updated, be sure to create a migration:
 
 ```bash
-docker container exec server python manage.py makemigrations # create a new migration
-docker container exec python manage.py migrate # apply migrations
+docker container exec server python manage.py makemigrations # create a new migration OR
+dxc server python manage.py makemigrations
 ```
+
+### Get Intellisense
+
+If you're in the dev container, this should be done already. You can run `poetry install` to get the latest dependencies.
+
+## Other
+
+If you modify anything in the `docker` folder, you need to add the `--build` flag or Docker won't give you the latest changes.
