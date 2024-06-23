@@ -10,8 +10,7 @@ services:
       interval: 3s
       timeout: 3s
       retries: 5
-    env_file:
-      - ./server/.env
+    env_file: ./server/.env
     ports:
       - 5432:5432
   server:
