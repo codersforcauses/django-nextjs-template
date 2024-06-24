@@ -4,6 +4,3 @@
 echo "Booting up the environments for you"
 
 docker compose up -d
-
-cd server && python manage.py migrate
-
