@@ -10,7 +10,10 @@ services:
       interval: 3s
       timeout: 3s
       retries: 5
-    env_file: ./server/.env
+    env_file:
+      - path: ./server.env
+        required: false
+      - ./server/.env.example
     ports:
       - 5432:5432
   server:
@@ -19,7 +22,10 @@ services:
       context: .
       dockerfile: ./docker/server/Dockerfile
     restart: unless-stopped
-    env_file: ./server/.env
+    env_file:
+      - path: ./server.env
+        required: false
+      - ./server/.env.example
     ports:
       - 8000:8000
     volumes:
@@ -30,7 +36,10 @@ services:
       context: .
       dockerfile: ./docker/client/Dockerfile
     restart: unless-stopped
-    env_file: ./client/.env
+    env_file:
+      - path: ./client.env
+        required: false
+      - ./client/.env.example
     ports:
       - 3000:3000
     volumes:

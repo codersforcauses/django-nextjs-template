@@ -5,10 +5,8 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 ## Get started
 
 0. Activate the dev container in VSCode
-1. Create a copy of `.env.example` found in the `client` folder and name it `.env`
-2. Create a copy of `.env.example` found in the `server` folder and name it `.env`
-3. Start the db, server and client with `docker compose up`
-4. Server is at `localhost:8000`, client at `localhost:3000`
+1. Start the db, server and client with `docker compose up`
+2. Server is at `localhost:8000`, client at `localhost:3000`
 
 ## Server
 
@@ -27,4 +25,10 @@ If you're in the dev container, this should be done already. You can run `poetry
 
 ## Other
 
+### Editing Docker stuff
+
 If you modify anything in the `docker` folder, you need to add the `--build` flag or Docker won't give you the latest changes.
+
+### Custom env vars
+
+Make a copy of `.env.example` named `.env` in the respective directory and edit the environment variables.
