@@ -15,13 +15,14 @@ fi
 
 # if node_modules doesn't exist, install it
 if [ ! -d ./client/node_modules ]; then
-    (cd client && npm install &)
+    (cd client && npm install)
 fi
-(cd server && poetry install &)
-docker compose pull &
+# TODO Figure out why this env variable is not getting loaded
+# probably because it needs to be added in .zprofile
+export POETRY_VIRTUALENVS_CREATE=false
+(cd server && poetry install && poetry show -v)
 
-# Wait for the installation to finish
-wait
+docker compose pull
 
 docker compose up -d
 
