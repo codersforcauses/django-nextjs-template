@@ -20,5 +20,5 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // Note: Useful for when they open it and want everything to just start
-  "postCreateCommand": "bash ./.devcontainer/setup.sh"
+  "postCreateCommand": "./.devcontainer/setup.sh"
 }
