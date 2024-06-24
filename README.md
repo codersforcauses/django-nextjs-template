@@ -31,4 +31,4 @@ If you modify anything in the `docker` folder, you need to add the `--build` fla
 
 ### Custom env vars
 
-Make a copy of `.env.example` named `.env` in the respective directory and edit the environment variables.
+Edit the `.env` file in the respective directory (client or server).
