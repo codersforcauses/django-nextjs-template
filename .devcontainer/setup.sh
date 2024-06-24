@@ -18,3 +18,4 @@ fi
 
 # Build containers so less waiting
 docker compose pull
+docker compose build
