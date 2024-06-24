@@ -20,6 +20,6 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // Note: Useful for when they open it and want everything to just start
-  "postCreateCommand": "${localWorkspaceFolder}/bin/one-time-setup.sh",
-  "postStartCommand": "${localWorkspaceFolder}/bin/boot-up.sh"
+  "postCreateCommand": "./bin/one-time-setup.sh",
+  "postStartCommand": "./bin/boot-up.sh"
 }
