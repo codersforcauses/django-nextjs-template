@@ -14,7 +14,7 @@ if [ ! -f ./server/.env ]; then
 fi
 
 # Give python editor intellisense
-cd server && POETRY_VIRTUALENVS_CREATE=false poetry install 
+(cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
 
 # Build containers so less waiting
 docker compose pull
