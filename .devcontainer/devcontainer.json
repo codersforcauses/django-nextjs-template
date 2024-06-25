@@ -12,7 +12,7 @@
 
   // Use this environment variable if you need to bind mount your local source code into a new container.
   "remoteEnv": {
-    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
+    "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder:-.}"
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -20,6 +20,5 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // Note: Useful for when they open it and want everything to just start
-  "postCreateCommand": "./bin/one-time-setup.sh",
-  "postStartCommand": "./bin/boot-up.sh"
+  "postCreateCommand": "./.devcontainer/setup.sh"
 }
