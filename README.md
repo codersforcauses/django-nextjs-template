@@ -19,11 +19,12 @@ docker container exec server python manage.py makemigrations # create a new migr
 dxc server python manage.py makemigrations
 ```
 
-### Get Intellisense
-
-If you're in the dev container, this should be done already. You can run `poetry install` to get the latest dependencies.
 
 ## Other
+
+### Get Intellisense
+
+If you're in the dev container, this should be done already. You can run `poetry install` and `npm install` in the correct folders to get the latest dependencies.
 
 ### Editing Docker stuff
 

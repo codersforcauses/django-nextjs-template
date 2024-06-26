@@ -13,8 +13,9 @@ if [ ! -f ./server/.env ]; then
     cp ./server/.env.example ./server/.env
 fi
 
-# Give python editor intellisense
+# Give editor intellisense
 (cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
+(cd client && npm install)
 
 # Build containers so less waiting
 docker compose pull
