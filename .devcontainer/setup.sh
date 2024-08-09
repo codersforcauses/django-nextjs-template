@@ -18,7 +18,9 @@ fi
 (cd client && npm install)
 
 # Migrate db
-(cd server && python manage.py migrate)
+(cd server &&
+python manage.py migrate --noinput &&
+python manage.py createsuperuser --noinput)
 
 # Make the Django static folder to remove the annoying warning
 (cd server && mkdir -p static)
