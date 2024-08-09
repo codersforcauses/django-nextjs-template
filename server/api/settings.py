@@ -48,9 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "api.healthcheck",
-    "corsheaders",
+    "django_extensions",
     "rest_framework",
+    "corsheaders",
+    "api.healthcheck",
 ]
 
 MIDDLEWARE = [

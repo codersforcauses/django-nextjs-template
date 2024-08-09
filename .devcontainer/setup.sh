@@ -17,8 +17,9 @@ fi
 (cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
 (cd client && npm install)
 
-# Migrate db
+# Nuke and migrate db
 (cd server &&
+python manage.py reset_db --noinput
 python manage.py migrate --noinput &&
 python manage.py createsuperuser --noinput)
 

@@ -40,6 +40,13 @@
           ]
         }
       ]
+    },
+    {
+      "type": "shell",
+      "command": "cd server && ./nuke.sh",
+      "label": "nuke db - server",
+      "detail": "cd server && nuke.sh",
+      "problemMatcher": []
     }
   ]
 }

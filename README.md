@@ -19,6 +19,10 @@ python manage.py makemigrations # create migration
 python manage.py migrate # apply migrations
 ```
 
+### Nuke the DB
+
+If you run into migration conflicts that you can't be bothered to fix, run `nuke.sh` to clear your database. Then, run migrations again.
+
 ## Other
 
 ### Update Dependencies
