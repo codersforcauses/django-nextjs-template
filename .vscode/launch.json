@@ -11,12 +11,7 @@
       "args": ["runserver"],
       "django": true,
       "autoStartBrowser": false,
-      "program": "${workspaceFolder}/server/manage.py",
-      "envFile": "${workspaceFolder}/.env",
-      // Override db host because Django will be running in this container
-      "env": {
-        "POSTGRES_HOST": "host.docker.internal"
-      }
+      "program": "${workspaceFolder}/server/manage.py"
     },
     {
       "name": "Next.js: Run frontend server",
