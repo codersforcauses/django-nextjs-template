@@ -13,10 +13,15 @@ if [ ! -f ./server/.env ]; then
     cp ./server/.env.example ./server/.env
 fi
 
-# Give editor intellisense
+# Install dependencies
 (cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
 (cd client && npm install)
 
-# Build containers so less waiting
-docker compose pull
-docker compose build --no-cache
+# Nuke and migrate db
+(cd server &&
+python manage.py reset_db --noinput
+python manage.py migrate --noinput &&
+python manage.py createsuperuser --noinput)
+
+# Make the Django static folder to remove the annoying warning
+(cd server && mkdir -p static)
