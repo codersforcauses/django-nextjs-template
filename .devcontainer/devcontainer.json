@@ -22,6 +22,9 @@
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [3000, 8000, 5432],
 
+  // The compose requires the server .env, so we need to copy it before the containers start
+  "initializeCommand": "./.devcontainer/pre-setup.sh",
+
   // Use 'postCreateCommand' to run commands after the container is created.
   // Note: Useful for when they open it and want everything to just start
   "postCreateCommand": "git config --global --add safe.directory /workspace && ./.devcontainer/setup.sh"
