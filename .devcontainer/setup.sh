@@ -18,10 +18,7 @@ fi
 (cd client && npm install)
 
 # Nuke and migrate db
-(cd server &&
-python manage.py reset_db --noinput
-python manage.py migrate --noinput &&
-python manage.py createsuperuser --noinput)
+(cd server && ./nuke.sh)
 
 # Make the Django static folder to remove the annoying warning
 (cd server && mkdir -p static)
