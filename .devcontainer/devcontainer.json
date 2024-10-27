@@ -19,6 +19,7 @@
   //   "WORKSPACE_FOLDER": "${workspaceFolder:/workspace}"
   // },
 
+  // Allows us to run docker commands without having to sudo (see compose)
   "remoteUser": "root",
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.

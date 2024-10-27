@@ -3,7 +3,7 @@ services:
     image: ghcr.io/codersforcauses/cfc-devenv@sha256:a739aeff96bdb2b9beb09f9dd14ca8cb5d84045e0896841535114481a59760c7
     volumes:
       - ../..:/workspaces:cached
-      # Gives access to host's Docker, but requires sudo for everything
+      # Gives access to host's Docker
       - /var/run/docker.sock:/var/run/docker.sock
 
     # Overrides default command so things don't shut down after the process ends.
