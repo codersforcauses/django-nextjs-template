@@ -20,5 +20,8 @@ fi
 (cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
 (cd client && npm install)
 
+# Run the database in the background
+docker compose up -d
+
 # Nuke and migrate db
 (cd server && ./nuke.sh)
