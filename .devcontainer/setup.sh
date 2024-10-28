@@ -6,7 +6,8 @@ figlet "1-time Setup"
 echo "Running one-time setup for you :)"
 
 # We can set up in global because this only applies to the entire devcontainer
-git config --global --add safe.directory .
+git config --global --add safe.directory /workspaces/* || true
+git config --global --add safe.directory /workspace/* || true
 git config --global --add --bool push.autoSetupRemote true
 
 # Create .env files if it doesn't exist
