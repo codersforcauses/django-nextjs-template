@@ -27,5 +27,9 @@ fi
 # Run the database in the background
 docker compose up -d
 
+# Wait for the database to start
+# 5 seconds should be enough
+sleep 5
+
 # Nuke and migrate db
 (cd server && ./nuke.sh)
