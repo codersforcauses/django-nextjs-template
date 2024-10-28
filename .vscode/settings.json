@@ -9,5 +9,24 @@
   "typescript.tsdk": "${workspaceFolder}/client/node_modules/typescript/lib",
   "shellcheck.ignorePatterns": {
     "**/.env*": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#fabe54",
+    "activityBar.background": "#fabe54",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#059b65",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#fabe54",
+    "statusBar.background": "#f9ab22",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#e29206",
+    "statusBarItem.remoteBackground": "#f9ab22",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#f9ab22",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#f9ab2299",
+    "titleBar.inactiveForeground": "#15202b99"
   }
 }
