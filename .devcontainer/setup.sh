@@ -28,8 +28,12 @@ fi
 docker compose up -d
 
 # Wait for the database to start
-# 5 seconds should be enough
-sleep 5
+# Get the container ID of the db service
+DB_CONTAINER_ID=$(docker compose ps -q db)
+echo "Waiting for the database to be ready..."
+until [ "$(docker inspect -f '{{.State.Health.Status}}' "$DB_CONTAINER_ID")" == "healthy" ]; do
+    sleep 1
+done
 
 # Nuke and migrate db
 (cd server && ./nuke.sh)
