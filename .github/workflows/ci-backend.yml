@@ -53,27 +53,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install poetry
+        run: pipx install poetry
+
       - name: Set up Python Env
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-
-      - name: Setup Poetry 🏗
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Cache .venv 📦
-        id: cached-poetry-dependencies
-        uses: actions/cache@v3.0.6
-        with:
-          path: server/.venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
+          cache: "poetry"
 
       - name: Install dependencies 👨🏻‍💻
         run: poetry install
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
 
       - name: Run Migrations 🕊️
         env:
@@ -83,9 +73,7 @@ jobs:
           POSTGRES_PORT: 5432
           EMAIL_PORT: 1025
           FRONTEND_URL: http://localhost:3000
-        run: |
-          source .venv/bin/activate
-          python manage.py migrate
+        run: poetry run python manage.py migrate
 
       - name: Run tests 🧪
         env:
@@ -97,10 +85,9 @@ jobs:
           EMAIL_PORT: 1025
           FRONTEND_URL: http://localhost:3000
         run: |
-          source .venv/bin/activate
-          python3 -m pip install coverage
-          coverage run manage.py test
-          coverage xml
+          poetry run python3 -m pip install coverage
+          poetry run coverage run manage.py test
+          poetry run coverage xml
 
       - name: Upload Coverage ☂️
         uses: codecov/codecov-action@v3
