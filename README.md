@@ -42,7 +42,7 @@ The easiest way to get started is using the VS Code Dev Container:
 - **Node.js 18+** and **npm** - [Download here](https://nodejs.org/)
 - **Python 3.12+** - [Download here](https://python.org/)
 - **Poetry** (Python package manager) - [Installation guide](https://python-poetry.org/docs/#installation)
-- **PostgreSQL 16+** - [Download here](https://www.postgresql.org/download/)
+- **Docker Desktop** - [Download here](https://www.docker.com/products/docker-desktop/)
 
 ### Installation Steps
 
@@ -63,40 +63,18 @@ curl -sSL https://install.python-poetry.org | python3 -
 pip install poetry
 ```
 
-**PostgreSQL**
+#### 3. Start the Database
 
-- **macOS (with Homebrew):**
-  ```bash
-  brew install postgresql@16
-  export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH" # Add to ~/.zshrc or ~/.bash_profile
-  brew services start postgresql@16
-  ```
-
-- **Windows:**
-  1. Download and run the [PostgreSQL installer](https://www.postgresql.org/download/windows/).
-  2. Follow the setup instructions and remember your username/password.
-  3. Add PostgreSQL's `bin` directory to your PATH if needed.
-
-- **Linux (Debian/Ubuntu):**
-  ```bash
-  sudo apt update
-  sudo apt install postgresql postgresql-contrib
-  sudo service postgresql start
-  ```
-
-#### 3. Set Up the Database
-
-- **macOS/Linux:**
-  ```bash
-  createdb your_db_name
-  ```
-- **Windows:**
-  - Open "SQL Shell (psql)" from the Start menu and run:
-    ```
-    CREATE DATABASE your_db_name;
-    ```
+```bash
+cd server && docker compose up -d
+```
 
 #### 4. Set Up Environment Variables
+
+Before proceeding, create your environment files by copying the examples:
+```bash
+cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
+```
 
 **Backend (`.env` in `server/`)**
 ```env
@@ -127,6 +105,7 @@ NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 ```bash
 cd server
 poetry install
+poetry shell
 python manage.py migrate
 python manage.py createsuperuser  # optional
 python manage.py runserver
