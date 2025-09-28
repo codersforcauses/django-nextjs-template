@@ -30,8 +30,8 @@ if [ "${APP_ENV^^}" = "DEVELOPMENT" ]; then
 
     # Run developments
     printf "\n" && echo "Starting inbuilt django webserver"
-    echo "Running: python manage.py runserver 0.0.0.0:8000"
-    python manage.py runserver 0.0.0.0:8000
+    echo "Running: python manage.py runserver 0.0.0.0:8081"
+    python manage.py runserver 0.0.0.0:8081
     exit
 fi
 
@@ -42,6 +42,6 @@ if [ "${APP_ENV^^}" = "PRODUCTION" ]; then
 
     # Run Gunicorn / Django
     printf "\n" && echo " Running Gunicorn / Django"
-    echo "Running: gunicorn api.wsgi -b 0.0.0.0:8000 --workers=6 --keep-alive 20 --log-file=- --log-level debug --access-logfile=/var/log/accesslogs/gunicorn --capture-output --timeout 50"
-    gunicorn api.wsgi -b 0.0.0.0:8000 --workers=6 --keep-alive 20 --log-file=- --log-level debug --access-logfile=/var/log/accesslogs/gunicorn --capture-output --timeout 50
+    echo "Running: gunicorn api.wsgi -b 0.0.0.0:8081 --workers=6 --keep-alive 20 --log-file=- --log-level debug --access-logfile=/var/log/accesslogs/gunicorn --capture-output --timeout 50"
+    gunicorn api.wsgi -b 0.0.0.0:8081 --workers=6 --keep-alive 20 --log-file=- --log-level debug --access-logfile=/var/log/accesslogs/gunicorn --capture-output --timeout 50
 fi

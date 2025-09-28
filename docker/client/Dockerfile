@@ -14,6 +14,8 @@ RUN npm install
 # Copy Application code into a directory called `app`
 COPY ./client /app
 
+RUN npm run build
+
 # ========================================
 # ---- Executed at Container Runtime ----
 # ========================================
@@ -21,5 +23,3 @@ COPY ./client /app
 # CMD commands get executed at container runtime!
 RUN chmod +x /entrypoint.sh
 CMD ["/entrypoint.sh"]
-
-# TODO: Production 
