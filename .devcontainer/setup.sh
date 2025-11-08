@@ -25,16 +25,5 @@ fi
 (cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
 (cd client && npm install)
 
-# Run the database in the background
-docker compose up -d
-
-# Wait for the database to start
-# Get the container ID of the db service
-DB_CONTAINER_ID=$(docker compose ps -q db)
-echo "Waiting for the database to be ready..."
-until [ "$(docker inspect -f '{{.State.Health.Status}}' "$DB_CONTAINER_ID")" == "healthy" ]; do
-    sleep 1
-done
-
 # Nuke and migrate db
 (cd server && ./nuke.sh)

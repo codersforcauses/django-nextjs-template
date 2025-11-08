@@ -1,6 +1,6 @@
 FROM python:3.12-slim
 
-RUN apt-get update && apt-get install --yes --no-install-recommends postgresql-client g++ libssl-dev && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --yes --no-install-recommends g++ libssl-dev && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip && pip install poetry
 
