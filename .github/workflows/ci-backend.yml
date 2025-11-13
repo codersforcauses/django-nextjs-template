@@ -88,4 +88,7 @@ jobs:
           uv run coverage xml
 
       - name: Upload Coverage ☂️
-        uses: codeco
+        uses: codecov/codecov-action@v3
+        with:
+          flags: backend
+          files: ./server/coverage.xml
