@@ -61,7 +61,7 @@ jobs:
         run: pip install uv
 
       - name: Install dependencies 👨🏻‍💻
-        run: uv sync --frozen  # Equivalent to "poetry install"
+        run: uv sync --frozen  
 
       - name: Run Migrations 🕊️
         env:
@@ -83,7 +83,6 @@ jobs:
           EMAIL_PORT: 1025
           FRONTEND_URL: http://localhost:3000
         run: |
-          uv run python3 -m pip install coverage
           uv run coverage run manage.py test
           uv run coverage xml
 
