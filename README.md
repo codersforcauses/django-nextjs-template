@@ -4,45 +4,10 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 
 ---
 
-## Quick Start (Dev Container) - Recommended
-
-The easiest way to get started is using the VS Code Dev Container:
-
-1. **Prerequisites**:  
-   - [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
-   - [VS Code](https://code.visualstudio.com/)  
-   - [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-
-2. **Open in Dev Container**:
-   - Clone this repository
-   - Open the project in VS Code
-   - When prompted, click "Reopen in Container" or use `Ctrl+Shift+P` → "Dev Containers: Reopen in Container"
-
-3. **Start the application**:
-   ```bash
-   # Terminal 1: Start the frontend
-   cd client && npm run dev
-
-   # Terminal 2: Start the backend
-   cd server && python manage.py runserver
-   ```
-
-4. **Access the application**:
-   - Frontend: [http://localhost:3000](http://localhost:3000)
-   - Backend API: [http://localhost:8000](http://localhost:8000)
-   - Admin panel: [http://localhost:8000/admin](http://localhost:8000/admin)
-
----
-## Local Development Setup
-
-**Note**: Only follow these steps if you're NOT using the dev container.
-
 ### Prerequisites
 
 - **Node.js 18+** and **npm** - [Download here](https://nodejs.org/)
-- **Python 3.12+** - [Download here](https://python.org/)
-- **Poetry** (Python package manager) - [Installation guide](https://python-poetry.org/docs/#installation)
-- **Docker Desktop** - [Download here](https://www.docker.com/products/docker-desktop/)
+- **uv 0.8+** (Python package manager) - [Installation guide](https://docs.astral.sh/uv/getting-started/installation/)
 
 ### Installation Steps
 
@@ -53,27 +18,29 @@ cd <project-name>
 ```
 
 #### 2. Install Prerequisites
-
-**Poetry (Python package manager)**
+**MacOS:**
 ```bash
-# Official installer (all OSes)
-curl -sSL https://install.python-poetry.org | python3 -
-
-# If that fails, use pip (all OSes)
-pip install poetry
+brew install uv 
 ```
-
-#### 3. Start the Database
-
+**Ubuntu**
 ```bash
-cd server && docker compose up -d
+apt install astral-uv
 ```
-
-#### 4. Set Up Environment Variables
-
+Otherwise, look at the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) 
+#### 3. Set Up Environment Variables
 Before proceeding, create your environment files by copying the examples:
 ```bash
 cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
+```
+
+#### 4. Set Up the Backend (Django)
+```bash
+cd server
+uv sync
+source .venv/bin/activate
+python manage.py migrate
+python manage.py createsuperuser  
+python manage.py runserver
 ```
 
 **Backend (`.env` in `server/`)**
@@ -99,16 +66,6 @@ FRONTEND_URL=http://localhost:3000
 **Frontend (`.env` in `client/`)**
 ```env
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-#### 5. Set Up the Backend (Django)
-```bash
-cd server
-poetry install
-poetry shell
-python manage.py migrate
-python manage.py createsuperuser  # optional
-python manage.py runserver
 ```
 
 #### 6. Set Up the Frontend (Next.js)
@@ -197,11 +154,7 @@ If you run into migration conflicts that you can't be bothered to fix, run `nuke
 
 ### Update Dependencies
 
-You can run `npm install` and `poetry install` in the respective `client` and `server` folders to install the newest dependencies.
-
-### Editing Docker stuff
-
-If you modify anything in the `docker` folder, you need to add the `--build` flag or Docker won't give you the latest changes.
+You can run `npm install` and `uv sync` in the respective `client` and `server` folders to install the newest dependencies.
 
 ### Changing env vars
 
