@@ -18,11 +18,16 @@ cd <project-name>
 ```
 
 #### 2. Install Prerequisites
+**MacOS:**
 ```bash
 brew install uv 
 ```
+**Ubuntu**
+```bash
+apt install astral-uv
+```
+Otherwise, look at the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) 
 #### 3. Set Up Environment Variables
-
 Before proceeding, create your environment files by copying the examples:
 ```bash
 cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
@@ -149,11 +154,7 @@ If you run into migration conflicts that you can't be bothered to fix, run `nuke
 
 ### Update Dependencies
 
-You can run `npm install` and `poetry install` in the respective `client` and `server` folders to install the newest dependencies.
-
-### Editing Docker stuff
-
-If you modify anything in the `docker` folder, you need to add the `--build` flag or Docker won't give you the latest changes.
+You can run `npm install` and `uv sync` in the respective `client` and `server` folders to install the newest dependencies.
 
 ### Changing env vars
 
