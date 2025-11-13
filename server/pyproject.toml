@@ -1,27 +1,30 @@
-[tool.poetry]
+[project]
 name = "server"
 version = "0.1.0"
 description = ""
-authors = ["Coders for Causes"]
+authors = [{ name = "Coders for Causes" }]
+requires-python = "~=3.12"
 readme = "README.md"
-package-mode = false
+dependencies = [
+    "Django~=5.1",
+    "djangorestframework>=3.15.1,<4",
+    "django-cors-headers>=4.3.1,<5",
+    "freezegun>=1.5.1,<2",
+    "gunicorn>=23.0.0,<24",
+    "python-dotenv>=1.0.1,<2",
+    "django-extensions>=3.2.3,<4",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-Django = "^5.1"
-djangorestframework = "^3.15.1"
-django-cors-headers = "^4.3.1"
-freezegun = "^1.5.1"
-gunicorn = "^23.0.0"
-python-dotenv = "^1.0.1"
-django-extensions = "^3.2.3"
+[dependency-groups]
+dev = [
+    "pytest>=8.3.2,<9",
+    "flake8==6.1.0",
+    "flake8-django~=1.4",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.2"
-flake8 = "6.1.0"
-flake8-django = "^1.4"
+[tool.uv]
+package = false
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
