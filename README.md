@@ -4,7 +4,7 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 
 ---
 
-## Quick Start (Dev Container) - Recommended
+## Quick Start (Dev Container)
 
 The easiest way to get started is using the VS Code Dev Container:
 
@@ -37,90 +37,52 @@ The easiest way to get started is using the VS Code Dev Container:
 
 **Note**: Only follow these steps if you're NOT using the dev container.
 
-### Prerequisites
-
-- **Node.js 18+** and **npm** - [Download here](https://nodejs.org/)
-- **Python 3.12+** - [Download here](https://python.org/)
-- **Poetry** (Python package manager) - [Installation guide](https://python-poetry.org/docs/#installation)
-- **Docker Desktop** - [Download here](https://www.docker.com/products/docker-desktop/)
-
 ### Installation Steps
 
-#### 1. Clone the Repository
+#### 1. Install Prerequisites
+
+- **Node.js 20+** and **npm** - [Download here](https://nodejs.org/)
+- **Python 3.12+** - [Download here](https://python.org/)
+- **Poetry** (Python package manager) - [Installation guide](https://python-poetry.org/docs/#installation)
+
+#### 2. Clone the Repository
 ```bash
 git clone <your-repo-url>
 cd <project-name>
 ```
 
-#### 2. Install Prerequisites
+#### 3. Set Up Environment Variables
 
-**Poetry (Python package manager)**
-```bash
-# Official installer (all OSes)
-curl -sSL https://install.python-poetry.org | python3 -
+The client and server are configured by `.env` files, local to your device and not tracked by git.
+To set these up you can simply copy the `.env.example` files in each to a new `.env` file.
 
-# If that fails, use pip (all OSes)
-pip install poetry
-```
-
-#### 3. Start the Database
-
-```bash
-cd server && docker compose up -d
-```
-
-#### 4. Set Up Environment Variables
-
-Before proceeding, create your environment files by copying the examples:
+Run the command below to do this automatically (system dependant).
 ```bash
 cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
 ```
 
-**Backend (`.env` in `server/`)**
-```env
-APP_NAME=DjangoAPI
-APP_ENV=DEVELOPMENT
-API_SECRET_KEY=your-secret-key-here
-API_ALLOWED_HOSTS=.localhost 127.0.0.1 [::1]
-
-POSTGRES_HOST=localhost
-POSTGRES_NAME=your_db_name
-POSTGRES_USER=your_username
-POSTGRES_PASSWORD=your_password
-POSTGRES_PORT=5432
-
-DJANGO_SUPERUSER_PASSWORD=Password123
-DJANGO_SUPERUSER_EMAIL=admin@test.com
-DJANGO_SUPERUSER_USERNAME=admin
-
-FRONTEND_URL=http://localhost:3000
-```
-
-**Frontend (`.env` in `client/`)**
-```env
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
-```
-
-#### 5. Set Up the Backend (Django)
+#### 4. Set Up the Backend (Django)
 ```bash
 cd server
 poetry install
-poetry shell
+
+eval $(poetry env activate) #Bash/Zsh/Csh
+Invoke-Expression (poetry env activate) #Powershell
+
 python manage.py migrate
 python manage.py createsuperuser  # optional
 python manage.py runserver
 ```
 
-#### 6. Set Up the Frontend (Next.js)
+#### 5. Set Up the Frontend (Next.js)
 ```bash
 cd client
 npm install
 npm run dev
 ```
 
-#### 7. Verify Installation
+#### 6. Verify Installation
 - Frontend: [http://localhost:3000](http://localhost:3000)
-- Backend API: [http://localhost:8000](http://localhost:8000)
 - Admin panel: [http://localhost:8000/admin](http://localhost:8000/admin)
 
 ---
