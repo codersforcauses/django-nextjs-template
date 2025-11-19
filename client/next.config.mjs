@@ -11,7 +11,6 @@ const config = {
   turbopack: {
     root: import.meta.dirname,
   },
-  context: import.meta.dirname,
   outputFileTracingRoot: import.meta.dirname,
   // Turns on file change polling for the Windows Dev Container
   // Doesn't work currently for turbopack, so file changes will not automatically update the client.
