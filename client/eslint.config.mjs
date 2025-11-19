@@ -12,7 +12,7 @@ const eslintConfig = [
     extends:  ["next/core-web-vitals", "next/typescript"]
   }),
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       'simple-import-sort': simpleImportSort,
       import: importPlugin,
@@ -27,6 +27,9 @@ const eslintConfig = [
       "import/newline-after-import": "warn",
       "import/no-duplicates": "warn",
     },
+  },
+  {
+    ignores: ["node_modules/**", ".next/**", "next-env.d.ts"]
   }
 ]
  
