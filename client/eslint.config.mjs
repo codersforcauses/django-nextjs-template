@@ -1,38 +1,25 @@
-import { defineConfig } from "eslint/config";
+import { FlatCompat } from '@eslint/eslintrc'
+import importPlugin from "eslint-plugin-import";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-import _import from "eslint-plugin-import";
-import { fixupPluginRules } from "@eslint/compat";
 import tsParser from "@typescript-eslint/parser";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
-import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
+  baseDirectory: import.meta.dirname,
 });
 
-export default defineConfig([
+const eslintConfig =[
+  ...compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"]
+  }),
   {
     files: ["**/*.ts", "**/*.tsx"],
-    extends: compat.extends(
-      "plugin:@next/next/recommended",
-      "plugin:@tanstack/eslint-plugin-query/recommended",
-    ),
-
     plugins: {
-      "simple-import-sort": simpleImportSort,
-      import: fixupPluginRules(_import),
+      'simple-import-sort': simpleImportSort,
+      import: importPlugin,
     },
-
     languageOptions: {
       parser: tsParser,
     },
-
     rules: {
       "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
@@ -41,4 +28,9 @@ export default defineConfig([
       "import/no-duplicates": "warn",
     },
   },
-]);
+  {
+    ignores: ["node_modules/**", ".next/**", "next-env.d.ts"]
+  }
+];
+
+export default eslintConfig
