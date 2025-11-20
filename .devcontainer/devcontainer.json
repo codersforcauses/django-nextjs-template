@@ -6,7 +6,7 @@
   "name": "CFC - Devenv",
   // You can get the sha256 here https://github.com/codersforcauses/automated-setups/pkgs/container/cfc-devenv
   // Pin it to a specific version to avoid unnecessary breaking changes
-  "image": "ghcr.io/samjjacko/cfc-devenv-uv@sha256:2be9065b81893bdef402930808b6e10980d438f32b54e420510c0b9f953835a7",
+  "image": "ghcr.io/codersforcauses/cfc-devenv-uv-base@sha256:c8afd032e86cd09ada500ce7d70729d45ac6db88e740c8cbe004dfc849996e9e",
 
   "features": {},
 
