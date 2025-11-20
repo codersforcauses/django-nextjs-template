@@ -1,6 +1,6 @@
 services:
   server:
-    image: ghcr.io/codersforcauses/transplant-prod-server:latest
+    image: ghcr.io/codersforcauses/django-nextjs-template-prod-server:latest
     container_name: transplant_server
     restart: unless-stopped
     env_file: ./.env.prod
@@ -14,7 +14,7 @@ services:
       - DJANGO_SETTINGS_MODULE=api.settings
 
   client:
-    image: ghcr.io/codersforcauses/transplant-prod-client:latest
+    image: ghcr.io/codersforcauses/django-nextjs-template-prod-client:latest
     container_name: transplant_client
     restart: unless-stopped
     env_file: ./.env.prod
