@@ -12,9 +12,10 @@
 
   // Authenticate with GitHub Container Registry
   "remoteEnv": {
-    "WORKSPACE_FOLDER": "${containerWorkspaceFolder}"
+    "WORKSPACE_FOLDER": "${containerWorkspaceFolder}",
+    // so we don't have to go looking for it
+    "UV_CACHE_DIR": "${containerWorkspaceFolder}/.uv-cache"
   },
-
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [3000, 8000, 5432],
 
