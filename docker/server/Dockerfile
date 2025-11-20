@@ -2,18 +2,15 @@ FROM python:3.12-slim
 
 RUN apt-get update && apt-get install --yes --no-install-recommends g++ libssl-dev && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip && pip install poetry
-
-RUN poetry config virtualenvs.in-project false
-RUN poetry config virtualenvs.create false
+RUN pip install --upgrade pip && pip install uv
 
 WORKDIR /app
 
 COPY ./docker/server/entrypoint.sh /entrypoint.sh
 
-COPY ./server/pyproject.toml ./server/poetry.lock ./
+COPY ./server/pyproject.toml ./server/uv.lock ./
 
-RUN poetry install
+RUN uv sync
 
 COPY ./server ./
 
