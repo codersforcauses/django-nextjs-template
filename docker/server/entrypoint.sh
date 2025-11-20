@@ -26,8 +26,7 @@ if [ "${APP_ENV^^}" = "DEVELOPMENT" ]; then
 
     # Install extra non-prod packages
     printf "\n" && echo "Installing dev dependencies for $APP_ENV"
-    poetry install
-
+    uv sync 
     # Run developments
     printf "\n" && echo "Starting inbuilt django webserver"
     echo "Running: python manage.py runserver 0.0.0.0:8081"
