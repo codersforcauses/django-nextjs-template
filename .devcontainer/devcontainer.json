@@ -15,8 +15,6 @@
     "WORKSPACE_FOLDER": "${containerWorkspaceFolder}"
   },
 
-  "initializeCommand": "docker login ghcr.io -u ${localEnv:GITHUB_USERNAME} -p ${localEnv:GITHUB_TOKEN}",
-
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [3000, 8000, 5432],
 
