@@ -25,6 +25,8 @@ dev = [
 
 [tool.uv]
 package = false
+managed = true
+python-preference = "only-system" # dont need another copy of python
 
 [build-system]
 requires = ["hatchling"]
