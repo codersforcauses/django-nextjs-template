@@ -2,11 +2,11 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [main]
+    branches: [use_uv]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-${{ github.ref_name }}
 
 jobs:
   build-and-push-client:
