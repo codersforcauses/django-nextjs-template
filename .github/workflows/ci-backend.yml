@@ -2,7 +2,7 @@ name: Backend code checks
 
 on:
   push:
-    branches: [main]
+    branches: [use_uv]
   pull_request:
     types: ["opened", "synchronize", "reopened", "edited"]
   workflow_dispatch:
