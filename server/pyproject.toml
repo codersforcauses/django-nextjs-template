@@ -3,24 +3,21 @@ name = "server"
 version = "0.1.0"
 description = ""
 authors = [{ name = "Coders for Causes" }]
-requires-python = "~=3.12"
+requires-python = ">=3.13"
 readme = "README.md"
 dependencies = [
-    "Django~=5.1",
-    "djangorestframework>=3.15.1,<4",
-    "django-cors-headers>=4.3.1,<5",
-    "freezegun>=1.5.1,<2",
-    "gunicorn>=23.0.0,<24",
-    "python-dotenv>=1.0.1,<2",
-    "django-extensions>=3.2.3,<4",
-    "coverage>=7.11.3",
+    "Django~=5.2",
+    "djangorestframework~=3.16",
+    "django-cors-headers~=4.9",
+    "gunicorn~=23.0",
+    "python-dotenv~=1.0",
 ]
 
 [dependency-groups]
 dev = [
-    "pytest>=8.3.2,<9",
-    "flake8==6.1.0",
-    "flake8-django~=1.4",
+    "pytest~=8.3",
+    "coverage",
+#    "django-extensions>=3.2.3,<4",s
 ]
 
 [tool.uv]
@@ -28,6 +25,35 @@ package = false
 managed = true
 python-preference = "only-system" # dont need another copy of python
 
+# UV Build tooling
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.8.11"]
+build-backend = "uv_build"
+
+# RUFF settings
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "RUF",  # Ruff specific rules - https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+    "C",    # mccabe rules - https://pypi.org/project/mccabe/
+    "F",    # pyflakes rules - https://pypi.org/project/pyflakes/
+    "E",    # pycodestyle error rules - https://pypi.org/project/pycodestyle/
+    "W",    # pycodestyle warning rules - https://pypi.org/project/pycodestyle/
+    "N",    # Naming - https://pypi.org/project/pep8-naming/
+    "A",    # builtins - https://docs.astral.sh/ruff/settings/#lintflake8-builtins
+    "B",    # flake8-bugbear rules - https://docs.astral.sh/ruff/settings/#lintflake8-bugbear
+    "I",    # isort rules - https://pypi.org/project/isort/
+    "DJ",   # django - https://pypi.org/project/flake8-django/
+]
+ignore = [
+    # "C901",  # max-complexity-10
+    "E501",  # line-too-long
+]
+
+# Rumdl settings
+# This is a tool for formatting markdown files, it can be used to fix issues automatically.
+[tool.rumdl]
+line-length = 120
