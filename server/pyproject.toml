@@ -23,7 +23,7 @@ dev = [
 [tool.uv]
 package = false
 managed = true
-python-preference = "only-system" # dont need another copy of python
+python-preference = "system" # Prefer system Python installations over managed Python installations.
 
 # UV Build tooling
 [build-system]
