@@ -9,25 +9,23 @@ on:
 
 jobs:
   lint:
-    name: Run Flake8
+    name: Run linting
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      - name: "Set up Python"
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
+      - name: get ruff
+        uses: astral-sh/ruff-action@v3
 
-      - name: "Install flake8 and plugins"
-        run: |
-          pip install flake8 flake8-django
+      - name: ruff check
+        run: ruff check
 
-      - name: "Run flake8"
-        uses: liskin/gh-problem-matcher-wrap@v1
-        with:
-          linters: flake8
-          run: flake8 --max-line-length 150 server/
+      - name: ruff format check
+        run: ruff format --check
 
   build:
     name: Build and test
@@ -50,18 +48,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
+        uses: actions/checkout@v5
 
       - name: Install uv
-        run: pip install uv
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies 👨🏻‍💻
-        run: uv sync --frozen  
+        run: uv sync --frozen --all-groups
 
       - name: Run Migrations 🕊️
         env:
