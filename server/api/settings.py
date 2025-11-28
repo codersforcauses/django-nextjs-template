@@ -21,18 +21,18 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL")
+FRONTEND_URL: str | None = os.environ.get("FRONTEND_URL")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("API_SECRET_KEY")
+SECRET_KEY: str | None = os.environ.get("API_SECRET_KEY", "!!!--This-Is-My-Super-Public-And-Not-Very-Secret-Key--!!!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("APP_ENV") == "DEVELOPMENT"
+DEBUG: bool = os.environ.get("APP_ENV", "DEVELOPMENT") == "DEVELOPMENT"
 
-ALLOWED_HOSTS = os.environ.get("API_ALLOWED_HOSTS").split() if os.environ.get("API_ALLOWED_HOSTS") else []
+ALLOWED_HOSTS: list[str] = os.environ.get("API_ALLOWED_HOSTS").split() if os.environ.get("API_ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -61,7 +61,12 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", FRONTEND_URL]
+
+CORS_ALLOWED_ORIGINS: list[str] = []
+if DEBUG:
+    CORS_ALLOWED_ORIGINS.extend(["http://localhost:3000", "http://127.0.0.1:3000"])
+if FRONTEND_URL:
+    CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
 
 ROOT_URLCONF = "api.urls"
 
