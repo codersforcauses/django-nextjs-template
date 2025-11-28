@@ -68,7 +68,7 @@ if DEBUG:
 if FRONTEND_URL:
     CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
 
-ROOT_URLCONF = "api.urls"
+ROOT_URLCONF = "server.urls"
 
 TEMPLATES = [
     {
@@ -86,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "api.wsgi.application"
+WSGI_APPLICATION = "server.wsgi.application"
 
 
 # Database
