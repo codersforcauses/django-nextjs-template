@@ -10,6 +10,8 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 - **uv 0.8+** (Python package manager) - [Installation guide](https://docs.astral.sh/uv/getting-started/installation/)
 
 ### Installation Steps
+If you're on Windows, you might have an easier time using devcontainers - if you're on VSCode, you should be able to install the devcontainers extension, and then open the command pallet with command P, then running `> Dev Containers: Reopen in Container`.
+You can skip straight to step 3
 
 #### 1. Clone the Repository
 ```bash
@@ -29,12 +31,17 @@ apt install astral-uv
 Otherwise, look at the [installation guide](https://docs.astral.sh/uv/getting-started/installation/) 
 #### 3. Set Up Environment Variables
 Before proceeding, create your environment files by copying the examples:
+##### 3.1 On Zsh (MacOS) or Dev Container 
 ```bash
 cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
 ```
-
+##### 3.2 On Powershell
+```shell
+cp .\client\.env.example .\client\.env
+cp .\server\.env.example .\server\.env
+```
 #### 4. Set Up the Backend (Django)
-##### 4.1 if you're on zsh (MacOS)
+##### 4.1 if you're on zsh (MacOS) or devcontainers:
 ```bash
 cd server
 uv sync
@@ -44,14 +51,12 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 ###### 4.2 If you're on powershell 
-You might have an easier time using devcontainers - if you're on VSCode, you should be able to install the devcontainers extension, and then open the command pallet with command P, then running `> Dev Containers: Reopen in Container`
-Otherwise:
-##### Navigate to the server folder in the project:
+Navigate to the server folder in the project:
 ```shell
 cd .\intermediate_team_* # replace with your team number 
 cd .\server
 ```
-##### Set up and source your virtual environment
+Set up and source your virtual environment
 ```shell
 uv sync
 .\venv\Scripts\Activate.ps1
