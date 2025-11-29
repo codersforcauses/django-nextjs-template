@@ -12,6 +12,7 @@ dependencies = [
     "gunicorn~=23.0",
     "python-dotenv~=1.0",
     "psycopg[binary,pool]~=3.2.13",
+    "djangorestframework-simplejwt>=5.5.1",
 ]
 
 [dependency-groups]

@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "healthcheck",
+    "feedback",
+    "user_profile",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +71,13 @@ if FRONTEND_URL:
     CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
 
 ROOT_URLCONF = "server.urls"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
 
 TEMPLATES = [
     {
@@ -108,7 +117,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 
 # Password validation
