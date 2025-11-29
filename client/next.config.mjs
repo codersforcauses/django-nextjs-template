@@ -1,8 +1,8 @@
-// import os from "node:os";
-// import isInsideContainer from "is-inside-container";
+import os from "node:os";
+import isInsideContainer from "is-inside-container";
 
-// const isWindowsDevContainer = () =>
-//   os.release().toLowerCase().includes("microsoft") && isInsideContainer();
+const isWindowsDevContainer = () =>
+  os.release().toLowerCase().includes("microsoft") && isInsideContainer();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
