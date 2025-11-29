@@ -10,7 +10,8 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 - **uv 0.8+** (Python package manager) - [Installation guide](https://docs.astral.sh/uv/getting-started/installation/)
 
 ### Installation Steps
-If you're on Windows, you might have an easier time using devcontainers - if you're on VSCode, you should be able to install the devcontainers extension, and then open the command pallet with command P, then running `> Dev Containers: Reopen in Container`.
+
+If you're on Windows, you might have an easier time using devcontainers. You will need to install and run docker desktop and VSCode. Once you have these, install the devcontainers extension, and then open the command pallet with command P, then running `> Dev Containers: Reopen in Container`.
 You can skip straight to step 3
 
 #### 1. Clone the Repository
