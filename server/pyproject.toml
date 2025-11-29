@@ -16,9 +16,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    #    "django-extensions>=3.2.3,<4",s
     "pytest~=8.3",
     "coverage",
-#    "django-extensions>=3.2.3,<4",s
+    "ruff>=0.14",
 ]
 
 [tool.uv]
