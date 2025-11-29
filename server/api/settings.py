@@ -32,11 +32,7 @@ SECRET_KEY = os.environ.get("API_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("APP_ENV") == "DEVELOPMENT"
 
-ALLOWED_HOSTS = (
-    os.environ.get("API_ALLOWED_HOSTS").split()
-    if os.environ.get("API_ALLOWED_HOSTS")
-    else []
-)
+ALLOWED_HOSTS = os.environ.get("API_ALLOWED_HOSTS").split() if os.environ.get("API_ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -48,7 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_extensions",
+    # "django_extensions",
     "rest_framework",
     "corsheaders",
     "api.healthcheck",
@@ -65,11 +61,7 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    FRONTEND_URL
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000", FRONTEND_URL]
 
 ROOT_URLCONF = "api.urls"
 
@@ -141,8 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))))  # <- '/' directory
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # <- '/' directory
 
 STATIC_URL = "/static/"
 

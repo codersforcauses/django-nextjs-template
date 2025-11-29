@@ -1,5 +1,4 @@
 import os from "node:os";
-
 import isInsideContainer from "is-inside-container";
 
 const isWindowsDevContainer = () =>

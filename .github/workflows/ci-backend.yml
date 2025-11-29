@@ -2,34 +2,31 @@ name: Backend code checks
 
 on:
   push:
-    branches: [main]
+    branches: [use_uv]
   pull_request:
     types: ["opened", "synchronize", "reopened", "edited"]
   workflow_dispatch:
 
 jobs:
   lint:
-    name: Run Flake8
+    name: Run linting
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v5
 
-      - name: "Set up Python"
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
+      - name: get ruff
+        uses: astral-sh/ruff-action@v3
 
-      - name: "Install flake8"
-        run: pip install flake8
+      - name: ruff check
+        run: ruff check
 
-      - name: "Install flake8-django"
-        run: pip install flake8-django
+      - name: ruff format check
+        run: ruff format --check
 
-      - name: "Run flake8"
-        uses: liskin/gh-problem-matcher-wrap@v1
-        with:
-          linters: flake8
-          run: flake8 --max-line-length 150 server/
   build:
     name: Build and test
     runs-on: ubuntu-latest
@@ -51,19 +48,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
-      - name: Install poetry
-        run: pipx install poetry
-
-      - name: Set up Python Env
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-          cache: "poetry"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies 👨🏻‍💻
-        run: poetry install
+        run: uv sync --frozen --all-groups
 
       - name: Run Migrations 🕊️
         env:
@@ -73,7 +64,7 @@ jobs:
           POSTGRES_PORT: 5432
           EMAIL_PORT: 1025
           FRONTEND_URL: http://localhost:3000
-        run: poetry run python manage.py migrate
+        run: uv run python manage.py migrate
 
       - name: Run tests 🧪
         env:
@@ -85,9 +76,8 @@ jobs:
           EMAIL_PORT: 1025
           FRONTEND_URL: http://localhost:3000
         run: |
-          poetry run python3 -m pip install coverage
-          poetry run coverage run manage.py test
-          poetry run coverage xml
+          uv run coverage run manage.py test
+          uv run coverage xml
 
       - name: Upload Coverage ☂️
         uses: codecov/codecov-action@v3

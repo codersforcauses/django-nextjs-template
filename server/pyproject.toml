@@ -1,28 +1,61 @@
-[tool.poetry]
+[project]
 name = "server"
 version = "0.1.0"
 description = ""
-authors = ["Coders for Causes"]
+authors = [{ name = "Coders for Causes" }]
+requires-python = ">=3.13"
 readme = "README.md"
-package-mode = false
+dependencies = [
+    "Django~=5.2",
+    "djangorestframework~=3.16",
+    "django-cors-headers~=4.9",
+    "gunicorn~=23.0",
+    "python-dotenv~=1.0",
+    "psycopg[binary,pool]~=3.2.13",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-Django = "^5.1"
-djangorestframework = "^3.15.1"
-django-cors-headers = "^4.3.1"
-psycopg = {extras = ["binary", "pool"], version = "^3.2.1"}
-freezegun = "^1.5.1"
-gunicorn = "^23.0.0"
-python-dotenv = "^1.0.1"
-django-extensions = "^3.2.3"
+[dependency-groups]
+dev = [
+    #    "django-extensions>=3.2.3,<4",s
+    "pytest~=8.3",
+    "coverage",
+    "ruff>=0.14",
+]
 
+[tool.uv]
+package = false
+managed = true
+python-preference = "system" # Prefer system Python installations over managed Python installations.
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.2"
-flake8 = "6.1.0"
-flake8-django = "^1.4"
-
+# UV Build tooling
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.8.11"]
+build-backend = "uv_build"
+
+# RUFF settings
+[tool.ruff]
+target-version = "py313"
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "RUF",  # Ruff specific rules - https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+    "C",    # mccabe rules - https://pypi.org/project/mccabe/
+    "F",    # pyflakes rules - https://pypi.org/project/pyflakes/
+    "E",    # pycodestyle error rules - https://pypi.org/project/pycodestyle/
+    "W",    # pycodestyle warning rules - https://pypi.org/project/pycodestyle/
+    "N",    # Naming - https://pypi.org/project/pep8-naming/
+    "A",    # builtins - https://docs.astral.sh/ruff/settings/#lintflake8-builtins
+    "B",    # flake8-bugbear rules - https://docs.astral.sh/ruff/settings/#lintflake8-bugbear
+    "I",    # isort rules - https://pypi.org/project/isort/
+    "DJ",   # django - https://pypi.org/project/flake8-django/
+]
+ignore = [
+    # "C901",  # max-complexity-10
+    "E501",  # line-too-long
+]
+
+# Rumdl settings
+# This is a tool for formatting markdown files, it can be used to fix issues automatically.
+[tool.rumdl]
+line-length = 120

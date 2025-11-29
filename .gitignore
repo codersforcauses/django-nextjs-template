@@ -126,6 +126,7 @@ celerybeat.pid
 .env.local
 .env
 .venv
+.uv-cache
 env/
 venv/
 ENV/

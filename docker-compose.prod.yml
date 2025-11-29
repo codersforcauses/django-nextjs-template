@@ -12,7 +12,7 @@ services:
       retries: 5
 
   server:
-    image: ghcr.io/codersforcauses/transplant-prod-server:latest
+    image: ghcr.io/codersforcauses/django-nextjs-template-use_uv-prod-server:latest
     container_name: transplant_server
     restart: unless-stopped
     env_file: ./.env.prod
@@ -28,7 +28,7 @@ services:
       - db
 
   client:
-    image: ghcr.io/codersforcauses/transplant-prod-client:latest
+    image: ghcr.io/codersforcauses/django-nextjs-template-use_uv-prod-client:latest
     container_name: transplant_client
     restart: unless-stopped
     env_file: ./.env.prod

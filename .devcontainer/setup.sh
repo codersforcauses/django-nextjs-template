@@ -22,7 +22,7 @@ fi
 (cd server && mkdir -p static)
 
 # Install dependencies
-(cd server && POETRY_VIRTUALENVS_CREATE=false poetry install)
+(cd server && uv sync)
 (cd client && npm install)
 
 # Run the database in the background
@@ -37,4 +37,4 @@ until [ "$(docker inspect -f '{{.State.Health.Status}}' "$DB_CONTAINER_ID")" == 
 done
 
 # Nuke and migrate db
-(cd server && ./nuke.sh)
+(cd server && uv run ./nuke.sh)

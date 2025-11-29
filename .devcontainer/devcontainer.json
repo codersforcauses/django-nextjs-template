@@ -6,15 +6,16 @@
   "name": "CFC - Devenv",
   // You can get the sha256 here https://github.com/codersforcauses/automated-setups/pkgs/container/cfc-devenv
   // Pin it to a specific version to avoid unnecessary breaking changes
-  "image": "ghcr.io/codersforcauses/cfc-devenv@sha256:18a25d3859e743e192e20f0d57ddc0d364c7397c9372d087025414d89d2ee66b",
+  "image": "ghcr.io/codersforcauses/cfc-devenv-uv@sha256:1450f1ff8be623b5b1f0e00728381af8efb1182e54ef8bbeaa447c7762abb29f",
 
   "features": {},
 
-  // Use this environment variable if you need to bind mount your local source code into a new container.
+  // Authenticate with GitHub Container Registry
   "remoteEnv": {
-    "WORKSPACE_FOLDER": "${workspaceFolder}"
+    "WORKSPACE_FOLDER": "${containerWorkspaceFolder}",
+    // so we don't have to go looking for it
+    "UV_CACHE_DIR": "${containerWorkspaceFolder}/.uv-cache"
   },
-
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   "forwardPorts": [3000, 8000, 5432],
 
