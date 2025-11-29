@@ -302,7 +302,7 @@ requires-dist = [
     { name = "django-cors-headers", specifier = "~=4.9" },
     { name = "djangorestframework", specifier = "~=3.16" },
     { name = "gunicorn", specifier = "~=23.0" },
-    { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2.13" },
+    { name = "psycopg", extras = ["binary", "pool"], specifier = "~=3.2.13" },
     { name = "python-dotenv", specifier = "~=1.0" },
 ]
 
