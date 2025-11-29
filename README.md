@@ -34,6 +34,7 @@ cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
 ```
 
 #### 4. Set Up the Backend (Django)
+##### 4.1 if you're on zsh (MacOS)
 ```bash
 cd server
 uv sync
@@ -42,7 +43,44 @@ python manage.py migrate
 python manage.py createsuperuser  
 python manage.py runserver
 ```
+###### 4.2 If you're on powershell 
+You might have an easier time using devcontainers - if you're on VSCode, you should be able to install the devcontainers extension, and then open the command pallet with command P, then running `> Dev Containers: Reopen in Container`
+Otherwise:
+##### Navigate to the server folder in the project:
+```shell
+cd .\intermediate_team_* # replace with your team number 
+cd .\server
+```
+##### Set up and source your virtual environment
+```shell
+uv sync
+.\venv\Scripts\Activate.ps1
+```
+Troubleshooting: Execution Policy Error
+If you receive an error message about scripts being disabled on the system, it is due to PowerShell's default execution policy which prevents running local scripts [1]. 
+You have a few options to resolve this:
+Option 1: Temporarily Bypass the Policy (Recommended for a single session) 
+You can bypass the execution policy only for your current PowerShell session by starting a new session with a specific flag: 
+```shell
+powershell -ExecutionPolicy Bypass -File .\venv\Scripts\Activate.ps1
+```
 
+Option 2: Change the Execution Policy for the Current User (More permanent) 
+If you frequently use virtual environments and trust the scripts you are running, you can change the execution policy for your user account. This will allow local scripts to run without error in future sessions:
+```shell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+  RemoteSigned: This policy allows scripts you write locally to run without a digital signature, but requires scripts downloaded from the internet to be signed by a trusted publisher [2].
+  When prompted to confirm the change, type Y and press Enter. 
+
+After setting the policy, you can use the standard activation command again:
+```shell
+.\venv\Scripts\Activate.ps1
+```
+
+Once activated, your PowerShell prompt will change to show the name of your virtual environment in parentheses (e.g., (venv) PS C:\Projects\MyProject>), indicating that you are now working within the isolated environment [1].
+
+##### If you've done step 3, you can safely ignore this.
 **Backend (`.env` in `server/`)**
 ```env
 APP_NAME=DjangoAPI
