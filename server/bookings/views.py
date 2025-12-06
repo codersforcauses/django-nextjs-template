@@ -9,7 +9,7 @@ from .permissions import IsOwnerOrReadOnly
 class FeedingViewSet(viewsets.ModelViewSet):
     """
     A viewset that provides CRUD operations for feedings.
-    
+
     Features:
     - Filtering by date, enclosure, and keeper
     - Search capabilities
@@ -28,7 +28,7 @@ class FeedingViewSet(viewsets.ModelViewSet):
     search_fields = ['keeper', 'enclosure__name']
     ordering_fields = ['start_time', 'end_time']
     ordering = ['-start_time']
-    
+
     def perform_create(self, serializer):
         """Automatically set the keeper to the current user"""
         serializer.save(keeper=self.request.user.username)

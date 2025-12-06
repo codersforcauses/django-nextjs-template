@@ -258,9 +258,9 @@ SIMPLE_JWT = {
 
 ### Authentication ViewSet
 
-Create authentication endpoints using a ViewSet
+Create authentication endpoints using a ViewSet.
 
-See the implemntation in `users/views.py`.
+See the implementation in `users/views.py`.
 
 ### Using JWT Tokens
 
@@ -335,13 +335,6 @@ This prevents users from creating feedings for other keepers.
 
 ---
 
-## Advanced Serializers
-
-This allows you to:
-
-- **Read**: Get full habitat details when retrieving an enclosure
-- **Write**: Only need to provide `habitat_id` when creating/updating an enclosure
-
 ### Custom Validation
 
 Add field-level or object-level validation:
@@ -382,6 +375,8 @@ class FeedingSerializer(serializers.ModelSerializer):
         return data
 ```
 
+Good place to write tests for these validations too!
+
 ---
 
 ## Pagination
@@ -399,26 +394,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-### PageNumberPagination
-
-Standard page-based pagination:
-
-```python
-# Custom pagination class
-from rest_framework.pagination import PageNumberPagination
-
-
-class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 10
-    page_size_query_param = 'page_size'  # Allow client to set page size
-    max_page_size = 100
-
-
-class EnclosureViewSet(viewsets.ModelViewSet):
-    queryset = Enclosure.objects.all()
-    serializer_class = EnclosureSerializer
-    pagination_class = StandardResultsSetPagination
-```
+Done! You can customise it further if needed, but the defaults are pretty good.
 
 ---
 
@@ -472,6 +448,8 @@ class EnclosureViewSet(viewsets.ModelViewSet):
 # /api/enclosures/?search=lion
 # /api/enclosures/?ordering=-capacity  # Descending
 ```
+
+---
 
 ## Testing
 
@@ -603,6 +581,19 @@ class EnclosureAPITestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['results']), 1)
+```
+
+### Running Tests
+
+```sh
+# Run all tests
+uv run manage.py test
+
+# Run tests for a specific app
+uv run manage.py test zoo
+
+# Run with verbose output
+uv run manage.py test -v 2
 ```
 
 ---
