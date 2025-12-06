@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -27,12 +28,14 @@ FRONTEND_URL: str | None = os.environ.get("FRONTEND_URL")
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY: str | None = os.environ.get("API_SECRET_KEY", "!!!--This-Is-My-Super-Public-And-Not-Very-Secret-Key--!!!")
+SECRET_KEY: str | None = os.environ.get(
+    "API_SECRET_KEY", "!!!--This-Is-My-Super-Public-And-Not-Very-Secret-Key--!!!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG: bool = os.environ.get("APP_ENV", "DEVELOPMENT") == "DEVELOPMENT"
 
-ALLOWED_HOSTS: list[str] = os.environ.get("API_ALLOWED_HOSTS").split() if os.environ.get("API_ALLOWED_HOSTS") else []
+ALLOWED_HOSTS: list[str] = os.environ.get(
+    "API_ALLOWED_HOSTS").split() if os.environ.get("API_ALLOWED_HOSTS") else []
 
 
 # Application definition
@@ -46,8 +49,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # "django_extensions",
     "rest_framework",
+    "rest_framework_simplejwt",
     "corsheaders",
+    "django_filters",
     "healthcheck",
+    'users',
+    'zoo',
+    'bookings'
 ]
 
 MIDDLEWARE = [
@@ -64,7 +72,8 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS: list[str] = []
 if DEBUG:
-    CORS_ALLOWED_ORIGINS.extend(["http://localhost:3000", "http://127.0.0.1:3000"])
+    CORS_ALLOWED_ORIGINS.extend(
+        ["http://localhost:3000", "http://127.0.0.1:3000"])
 if FRONTEND_URL:
     CORS_ALLOWED_ORIGINS.append(FRONTEND_URL)
 
@@ -134,7 +143,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # <- '/' directory
+PROJECT_ROOT = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))  # <- '/' directory
 
 STATIC_URL = "/static/"
 
@@ -149,3 +159,43 @@ STATICFILES_DIRS = ("static",)
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Django Rest Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_PAGINATION_CLASS': (
+        'rest_framework.pagination.PageNumberPagination'
+    ),
+    'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}
+
+# Simple JWT
+# https://django-rest-framework-simplejwt.readthedocs.io/
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': False,
+    'UPDATE_LAST_LOGIN': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+}

@@ -9,5 +9,10 @@
   "typescript.tsdk": "${workspaceFolder}/client/node_modules/typescript/lib",
   "shellcheck.ignorePatterns": {
     "**/.env*": true
-  }
+  },
+  "python.defaultInterpreterPath": "server/.venv/bin/python",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "editor.formatOnSave": true,
 }

@@ -17,8 +17,21 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_nested.routers import DefaultRouter
+from rest_framework.routers import APIRootView
+
+from zoo.urls import router as enclosures_router
+from bookings.urls import router as feedings_router
+from users.urls import router as auth_router
+
+router = DefaultRouter()
+router.APIRootView = APIRootView
+router.registry.extend(enclosures_router.registry)
+router.registry.extend(feedings_router.registry)
+router.registry.extend(auth_router.registry)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/healthcheck/", include("healthcheck.urls")),
+    path('api/', include(router.urls)),
 ]

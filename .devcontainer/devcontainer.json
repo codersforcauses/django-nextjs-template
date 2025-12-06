@@ -21,5 +21,13 @@
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // Note: Useful for when they open it and want everything to just start
-  "postCreateCommand": "./.devcontainer/setup.sh"
+  "postCreateCommand": "./.devcontainer/setup.sh",
+
+   "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "server/.venv/bin/python"
+            }
+        }
+    }
 }
