@@ -12,8 +12,7 @@ services:
       retries: 5
 
   server:
-    image: ghcr.io/codersforcauses/transplant-prod-server:latest
-    container_name: transplant_server
+    image: ghcr.io/codersforcauses/django-nextjs-template-prod-server:latest
     restart: unless-stopped
     env_file: ./.env.prod
     ports:
@@ -21,15 +20,14 @@ services:
     entrypoint: /entrypoint.sh
     volumes:
       - ./opt/accesslogs/:/var/log/accesslogs/
-      - ./opt/static_files:/opt/static_files
+      - ./opt/static_files:/app/static_files
     environment:
       - DJANGO_SETTINGS_MODULE=api.settings
     depends_on:
       - db
 
   client:
-    image: ghcr.io/codersforcauses/transplant-prod-client:latest
-    container_name: transplant_client
+    image: ghcr.io/codersforcauses/django-nextjs-template-prod-client:latest
     restart: unless-stopped
     env_file: ./.env.prod
     ports:
@@ -40,7 +38,6 @@ services:
 
   nginx:
     image: nginx:stable-alpine3.21
-    container_name: transplant_nginx
     restart: unless-stopped
     ports:
       - 80:80
@@ -48,14 +45,13 @@ services:
 
     volumes:
       - ./docker/nginx/custom.conf:/etc/nginx/nginx.conf
-      - ./opt/static_files:/app/static_files
+      - ./opt/static_files:/opt/static_files/
     depends_on:
       - server
       - client
 
   watchtower:
     image: containrrr/watchtower:latest
-    container_name: transplant_watchtower
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
