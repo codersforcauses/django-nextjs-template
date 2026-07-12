@@ -29,7 +29,7 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
-@keyframes accordion-down: {
+@keyframes accordion-down {
   from: {
     height: 0;
   }
@@ -38,7 +38,7 @@
   }
 }
 
-@keyframes accordion-up: {
+@keyframes accordion-up {
   from: {
     height: var(--radix-accordion-content-height);
   }
