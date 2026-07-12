@@ -1,10 +1,9 @@
 import { defineConfig } from "eslint/config";
-import { fixupPluginRules } from "@eslint/compat";
 import tsParser from "@typescript-eslint/parser";
 import nextPlugin from "@next/eslint-plugin-next";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
-import _import from "eslint-plugin-import";
+import importX from "eslint-plugin-import-x";
 
 export default defineConfig([
   {
@@ -15,7 +14,7 @@ export default defineConfig([
     plugins: {
       "@next/next": nextPlugin,
       "simple-import-sort": simpleImportSort,
-      import: fixupPluginRules(_import),
+      import: importX,
     },
     languageOptions: {
       parser: tsParser,
