@@ -8,9 +8,9 @@ Django + Nextjs Template: Standardised CFC Tech Stack
 
 The easiest way to get started is using the VS Code Dev Container:
 
-1. **Prerequisites**:
-   - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-   - [VS Code](https://code.visualstudio.com/)
+1. **Prerequisites**:  
+   - [Docker Desktop](https://www.docker.com/products/docker-desktop/)  
+   - [VS Code](https://code.visualstudio.com/)  
    - [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 2. **Open in Dev Container**:
@@ -19,7 +19,6 @@ The easiest way to get started is using the VS Code Dev Container:
    - When prompted, click "Reopen in Container" or use `Ctrl+Shift+P` → "Dev Containers: Reopen in Container"
 
 3. **Start the application**:
-
    ```bash
    # Terminal 1: Start the frontend
    cd client && npm run dev
@@ -34,7 +33,6 @@ The easiest way to get started is using the VS Code Dev Container:
    - Admin panel: [http://localhost:8000/admin](http://localhost:8000/admin)
 
 ---
-
 ## Local Development Setup
 
 **Note**: Only follow these steps if you're NOT using the dev container.
@@ -49,7 +47,6 @@ The easiest way to get started is using the VS Code Dev Container:
 ### Installation Steps
 
 #### 1. Clone the Repository
-
 ```bash
 git clone <your-repo-url>
 cd <project-name>
@@ -58,7 +55,6 @@ cd <project-name>
 #### 2. Install Prerequisites
 
 **Poetry (Python package manager)**
-
 ```bash
 # Official installer (all OSes)
 curl -sSL https://install.python-poetry.org | python3 -
@@ -67,22 +63,22 @@ curl -sSL https://install.python-poetry.org | python3 -
 pip install poetry
 ```
 
-#### 3. Start the Database
+#### 3. Set Up Environment Variables
+
+Before proceeding, create your environment files by copying the examples:
+```bash
+cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
+```
+
+#### 4. Start the Database
 
 ```bash
 cd server && docker compose up -d
 ```
 
-#### 4. Set Up Environment Variables
-
-Before proceeding, create your environment files by copying the examples:
-
-```bash
-cp ./client/.env.example ./client/.env && cp ./server/.env.example ./server/.env
-```
+Note: Your terminal may not support the '&&' metacharacter e.g Powershell, so you can just do the commands individually
 
 **Backend (`.env` in `server/`)**
-
 ```env
 APP_NAME=DjangoAPI
 APP_ENV=DEVELOPMENT
@@ -103,25 +99,25 @@ FRONTEND_URL=http://localhost:3000
 ```
 
 **Frontend (`.env` in `client/`)**
-
 ```env
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
 ```
 
 #### 5. Set Up the Backend (Django)
-
 ```bash
 cd server
 poetry install
-# POSIX shells
-eval "$(poetry env activate)"
+
+#Get into a poetry venv
+eval $(poetry env activate) #Bash/Zsh/Csh
+Invoke-Expression (poetry env activate) #Powershell
+
 python manage.py migrate
 python manage.py createsuperuser  # optional
 python manage.py runserver
 ```
 
 #### 6. Set Up the Frontend (Next.js)
-
 ```bash
 cd client
 npm install
@@ -129,7 +125,6 @@ npm run dev
 ```
 
 #### 7. Verify Installation
-
 - Frontend: [http://localhost:3000](http://localhost:3000)
 - Backend API: [http://localhost:8000](http://localhost:8000)
 - Admin panel: [http://localhost:8000/admin](http://localhost:8000/admin)
@@ -139,7 +134,6 @@ npm run dev
 ## Development Commands
 
 ### Backend (Django)
-
 ```bash
 cd server
 
@@ -163,7 +157,6 @@ python manage.py test
 ```
 
 ### Frontend (Next.js)
-
 ```bash
 cd client
 
@@ -219,4 +212,3 @@ If you modify anything in the `docker` folder, you need to add the `--build` fla
 ### Changing env vars
 
 Edit the `.env` file in the respective directory (client or server).
-
