@@ -1,3 +1,5 @@
+"use client";
+
 import { Inter as FontSans } from "next/font/google";
 import { useState } from "react";
 
