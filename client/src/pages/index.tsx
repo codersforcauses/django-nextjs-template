@@ -1,4 +1,5 @@
 import { Inter as FontSans } from "next/font/google";
+import Link from "next/link";
 import { useState } from "react";
 
 import { usePings } from "@/hooks/pings";
@@ -27,6 +28,9 @@ export default function Home() {
       <h1 className="text-primary text-3xl">Test title</h1>
       <Button onClick={() => setClicked(true)}>
         {isLoading ? "Loading" : "Ping"}
+      </Button>
+      <Button asChild>
+        <Link href="/candidates">View candidates</Link>
       </Button>
       <p>
         Response from server: <span>{data as string}</span>
